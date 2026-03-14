@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Garofalo</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f5f0;
+    --accent: #4f46e5;
+    --accent-light: #818cf8;
+    --gray: #6b7280;
+    --card-bg: #141414;
+    --border: #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,10,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+  }
+  nav .logo span { color: var(--accent-light); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  nav ul a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent-light), #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79,70,229,0.3);
+  }
+  .btn-outline {
+    border: 1.5px solid var(--border);
+    color: var(--white);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--accent-light);
+    color: var(--accent-light);
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gray);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gray);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-content {
+    max-width: 740px;
+  }
+  .about-content p {
+    color: #d1d5db;
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .about-formation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .formation-item h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .formation-item p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* WORK / PORTFOLIO */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .work-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  .work-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+  .work-card.featured {
+    grid-column: 1 / -1;
+  }
+  .card-header {
+    padding: 2rem 2rem 0;
+  }
+  .card-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .tag-thought { background: rgba(79,70,229,0.15); color: var(--accent-light); }
+  .tag-case { background: rgba(192,132,252,0.15); color: #c084fc; }
+  .tag-explainer { background: rgba(52,211,153,0.15); color: #34d399; }
+  .tag-cultural { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .tag-philosophy { background: rgba(244,114,182,0.15); color: #f472b6; }
+  .tag-project { background: rgba(56,189,248,0.15); color: #38bdf8; }
+  .card-body {
+    padding: 0 2rem 2rem;
+  }
+  .card-body h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .card-body p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .card-body .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+  .card-body .read-more:hover { gap: 0.8rem; }
+
+  /* FEATURED ARTICLE */
+  .featured-excerpt {
+    padding: 2rem;
+  }
+  .featured-excerpt h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .featured-excerpt p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+  .featured-excerpt .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+  .featured-excerpt .read-more:hover { gap: 0.8rem; }
+
+  /* CRAFT */
+  .craft-section {
+    position: relative;
+  }
+  .craft-content {
+    max-width: 740px;
+  }
+  .craft-content p {
+    color: #d1d5db;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  /* WORK WITH ME */
+  .workwith-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .workwith-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: border-color 0.3s;
+  }
+  .workwith-card:hover {
+    border-color: var(--accent);
+  }
+  .workwith-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+  }
+  .workwith-card p {
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    text-align: center;
+    padding: 8rem 3rem;
+  }
+  .contact-section .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+  .contact-section .section-desc {
+    margin: 1rem auto 2.5rem;
+    max-width: 500px;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+  .contact-link:hover {
+    border-color: var(--accent-light);
+    background: rgba(79,70,229,0.05);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 3rem;
+    color: var(--gray);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ARTICLE MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 4rem 2rem;
+  }
+  .modal-overlay.active { display: block; }
+  .modal-content {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .modal-close:hover { border-color: var(--accent-light); }
+  .modal-content .card-tag { margin-bottom: 1.5rem; }
+  .modal-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .modal-content .byline {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-content .article-body p {
+    color: #d1d5db;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+  .modal-content .article-body h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+  }
+  .modal-content .article-body blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: var(--accent-light);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .workwith-grid { grid-template-columns: 1fr; }
+    .about-formation { grid-template-columns: 1fr; gap: 1.25rem; }
+    .contact-section { padding: 5rem 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    nav ul { display: none; }
+    .hero h1 { letter-spacing: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">EG<span>.</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Writing</a></li>
+    <li><a href="#craft">Craft</a></li>
+    <li><a href="#workwith">Work With Me</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Philosophy &amp; Letters</div>
+  <h1>A human voice for a potentially <em>inhuman age.</em></h1>
+  <p class="hero-sub">I write about artificial intelligence with the philosophical seriousness it deserves and the clarity it demands.</p>
+  <div class="hero-cta">
+    <a href="#work" class="btn btn-primary">Read My Work</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-content">
+    <div class="section-title">The question underneath everything.</div>
+    <p>We are said to live in an age without a new world. I agree with this insofar as there is no new physical land accessible to us, but I disagree with the spirit of disappointment that is usually drawn from it. Our age will be offered transformations that dwarf the discovery of continents — and the people who understand them best will be the ones capable of rendering the most serious judgment about what they mean.</p>
+    <p>My background is in philosophy. I hold a master's degree from St. John's College, where I wrote a thesis on Shakespeare's Coriolanus and the question of whether the highest human qualities can survive contact with the conditions of ordinary life. I studied Plato and Aristotle, read all of Shakespeare from the lens of political theory, and spent years in the company of classical and biblical texts. This is the frame through which I think about artificial intelligence — and it is the reason my writing sounds different from what the industry typically produces.</p>
+    <p>The question underneath everything I write is Aristotelian: what is man, what is contemplation, and what happens to human nature when the thing that made us distinct is replicated by a machine we built for ourselves. I am interested in the minds of the people building this technology, the assumptions they carry without examining, the contradictions they cannot see. I write for the people making decisions about AI who sense that something important is at stake and want someone willing to say what it is.</p>
+
+    <div class="about-formation">
+      <div class="formation-item">
+        <h4>Philosophy</h4>
+        <p>M.A., St. John's College. Plato, Aristotle, Shakespeare, political theory.</p>
+      </div>
+      <div class="formation-item">
+        <h4>Writing</h4>
+        <p>Essays, cultural criticism, fiction, screenwriting. The craft of giving thought a body.</p>
+      </div>
+      <div class="formation-item">
+        <h4>AI</h4>
+        <p>Deep immersion in the industry, its products, its language, its blind spots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label">Writing</div>
+  <div class="section-title">Selected work.</div>
+  <p class="section-desc">Essays on AI, culture, and what the technology asks of the people building it. Click any piece to read in full.</p>
+
+  <div class="work-grid">
+
+    <!-- FEATURED: What Is Man Reduced To? -->
+    <div class="work-card featured" onclick="openModal('article7')">
+      <div class="featured-excerpt">
+        <div class="card-tag tag-philosophy">Philosophy</div>
+        <h3>What Is Man Reduced To?</h3>
+        <p>AI has been developed by man for the sake of man. It is the product of our contemplation — the activity that Aristotle tells us makes us most like the gods. And yet the thing we built through contemplation now threatens to make contemplation unnecessary. This essay sits with that paradox and asks what survives.</p>
+        <a class="read-more" href="javascript:void(0)">Read Full Essay &rarr;</a>
+      </div>
+    </div>
+
+    <!-- The White Whale -->
+    <div class="work-card" onclick="openModal('article5')">
+      <div class="card-header">
+        <div class="card-tag tag-philosophy">Essay</div>
+      </div>
+      <div class="card-body">
+        <h3>The White Whale</h3>
+        <p>The investors funded whale oil. Ahab is chasing something else entirely. The AI industry exhibits the same structure — a stated mission of useful products and an unstated pursuit that sounds, when the founders speak unguarded, like a man who has been wounded by a question and will not rest until it is answered.</p>
+        <a class="read-more" href="javascript:void(0)">Read Essay &rarr;</a>
+      </div>
+    </div>
+
+    <!-- The Chorus Remembers -->
+    <div class="work-card" onclick="openModal('article6')">
+      <div class="card-header">
+        <div class="card-tag tag-philosophy">Essay</div>
+      </div>
+      <div class="card-body">
+        <h3>The Chorus Remembers</h3>
+        <p>In Greek tragedy, before the hero speaks, the chorus is already on stage. Fifteen ordinary men who cannot stop the action but who see the pattern, carry the memory, and survive to tell the story. The public occupies the same position in relation to the AI industry. The question is whether the chorus will be heard.</p>
+        <a class="read-more" href="javascript:void(0)">Read Essay &rarr;</a>
+      </div>
+    </div>
+
+    <!-- FEATURED: The Oldest Algorithm -->
+    <div class="work-card featured" onclick="openModal('article4')">
+      <div class="featured-excerpt">
+        <div class="card-tag tag-thought">Essay</div>
+        <h3>The Oldest Algorithm: How the Origins of Myth Can Teach Us To Talk About AI</h3>
+        <p>Humanity has told stories about creating minds since we became aware of our own. From Prometheus to the Golem of Prague to Pandora's box, the fears we carry into every AI headline were written long before silicon existed. We tell only the cautionary halves because they make for better stories. But the full versions end differently.</p>
+        <a class="read-more" href="javascript:void(0)">Read Full Essay &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Twilight of the AI Buzzword -->
+    <div class="work-card" onclick="openModal('article1')">
+      <div class="card-header">
+        <div class="card-tag tag-thought">Essay</div>
+      </div>
+      <div class="card-body">
+        <h3>The Twilight of the AI Buzzword</h3>
+        <p>Every company now claims to be AI-powered. When everything is intelligent, the word has been stretched so thin it signifies nothing. The companies that will win are the ones that stop selling the seed of "AI" and start showing the fruit of its labor.</p>
+        <a class="read-more" href="javascript:void(0)">Read Article &rarr;</a>
+      </div>
+    </div>
+
+    <!-- LLMs Don't Think -->
+    <div class="work-card" onclick="openModal('article3')">
+      <div class="card-header">
+        <div class="card-tag tag-explainer">Explainer</div>
+      </div>
+      <div class="card-body">
+        <h3>LLMs Don't "Think" — And That's Fine</h3>
+        <p>Somewhere between the first ChatGPT demo and now, we collectively decided that large language models think and reason and understand. We haven't settled that question. And the language matters, because misunderstanding what LLMs do leads to misusing them.</p>
+        <a class="read-more" href="javascript:void(0)">Read Article &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Case Study -->
+    <div class="work-card" onclick="openModal('article2')">
+      <div class="card-header">
+        <div class="card-tag tag-case">Case Study</div>
+      </div>
+      <div class="card-body">
+        <h3>How a Seed-Stage AI Startup Found Its Voice</h3>
+        <p>A computer vision startup could explain their technology to engineers in thirty seconds but the moment they put a deck in front of an enterprise buyer, the room glazed over. The problem was orientation — they were showing the engine instead of telling you where the car could take you.</p>
+        <a class="read-more" href="javascript:void(0)">Read Case Study &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Holdem Bot -->
+    <div class="work-card featured" onclick="openModal('article8')">
+      <div class="featured-excerpt">
+        <div class="card-tag tag-project">Applied Theory</div>
+        <h3>The Regret Machine: Building a Game-Theoretic Poker Engine</h3>
+        <p>A poker hand is an imperfect-information game played under uncertainty with real consequences. The same structure governs every serious decision a person or a machine will ever face. I built a poker engine from scratch in pure Python — Monte Carlo simulation, counterfactual regret minimization, opponent modeling — to understand from the inside what it means to make decisions when the information is incomplete and the stakes are real.</p>
+        <a class="read-more" href="javascript:void(0)">Read Project Essay &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CRAFT -->
+<section id="craft" class="craft-section">
+  <div class="section-label">The Craft</div>
+  <div class="section-title">Formation.</div>
+  <div class="craft-content">
+    <p>Before I ever wrote about artificial intelligence, I wrote fiction — screenplays, short stories, and dialogues that have strengthened my understanding of myself and the world. This work was guided by a conviction that stories can establish order among elements we initially perceive to be in opposition to one another; that the right narrative finds the thread connecting what looked irreconcilable.</p>
+    <p>The power that stories possess is unique: when they first emerge, they are often quiet and insignificant, but over time, the best ones grow to enormous heights of influence and reshape the world. I have spent years trying to understand what separates the ones that grow from the ones that die. The answer, I believe, is that the best stories explore the desires common to all human beings — we want to live well, and that phrase can take on an infinite number of meanings. Every serious piece of fiction I have written has been circling that question without my fully realizing it, and I suspect it will occupy me for the rest of my life.</p>
+    <p>This question has always been the same one that animates my thinking about AI: what does it mean to be human in the presence of forces that threaten to reduce you, and what is the possession most worth preserving when the ground shifts beneath your feet and you are short on time.</p>
+    <p>I studied philosophy because I wanted to learn how to think. I write fiction because I wanted to learn how to give thought a face, a voice, hands that will eventually weaken and fade. I write about AI because the question it poses is the same question that philosophy and fiction have always asked, and it has never been more urgent: what is man, and what will he become.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK WITH ME -->
+<section id="workwith">
+  <div class="section-label">Work With Me</div>
+  <div class="section-title">What I can do for you.</div>
+  <p class="section-desc">I work with AI companies and organizations that want their communications to carry real thought.</p>
+
+  <div class="workwith-grid">
+    <div class="workwith-card">
+      <h3>Writing &amp; Thought Leadership</h3>
+      <p>Essays, long-form articles, op-eds, and position pieces that treat AI with philosophical seriousness. I write the kind of content that makes people stop scrolling and sit with a question — the kind that positions a company as one that actually thinks about what it is building.</p>
+    </div>
+    <div class="workwith-card">
+      <h3>Brand Narrative &amp; Voice</h3>
+      <p>The foundational story of who you are, why you exist, and what you see that your competitors do not. I help AI companies find a voice that sounds like someone who actually believes what they are saying.</p>
+    </div>
+    <div class="workwith-card">
+      <h3>Technical Translation</h3>
+      <p>Research papers, product specs, and technical documentation transformed into prose that non-technical decision-makers understand, trust, and act on. The goal is clarity that does not sacrifice precision — the kind of writing that makes the complex feel inevitable.</p>
+    </div>
+    <div class="workwith-card">
+      <h3>AI Advisory</h3>
+      <p>For organizations navigating the AI landscape and wondering what is real, what is hype, and what it means for the people inside their walls. I help teams think through the human implications of the technology they are adopting — the questions nobody puts on the slide deck.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label">Let's Talk</div>
+  <div class="section-title">The conversation starts here.</div>
+  <p class="section-desc">I am open to freelance projects, full-time roles, and serious conversations about AI and what it asks of us.</p>
+  <div class="contact-links">
+    <a href="mailto:ethandgarofalo@gmail.com" class="contact-link">&#9993; ethandgarofalo@gmail.com</a>
+    <a href="https://linkedin.com" class="contact-link" target="_blank">&#128279; LinkedIn</a>
+    <a href="https://twitter.com" class="contact-link" target="_blank">&#128279; Twitter / X</a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Ethan Garofalo. Built with intention.
+</footer>
+
+<!-- ARTICLE MODALS -->
+<!-- Article 1 -->
+<div class="modal-overlay" id="article1">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article1')">&times;</button>
+    <div class="card-tag tag-thought">Essay</div>
+    <h2>The Twilight of the AI Buzzword: Why the Sun Must Set on Words like "Intelligence"</h2>
+    <div class="byline">By Ethan Garofalo &middot; February 2026 &middot; 6 min read</div>
+    <div class="article-body">
+      <p>Open any startup's landing page in 2026 and you'll find the same word doing an extraordinary amount of heavy lifting: <em>intelligent</em>. Intelligent scheduling. Intelligent analytics. Intelligent toasters, probably, if you scroll far enough. Laugh if you will, but the desire for intelligent toasters is not far-fetched. It is the consequence of intelligence becoming synonymous with good. We want everything to be intelligent because we believe it is superior than the unintelligent, but if intelligence is applied to everything, what do it truly mean? The word has been stretched so thin it's become translucent — a signifier of nothing, recognized by everyone, thought to be necessary for success, yet simultaneously betrays a lack of ingenuity and originality.</p>
+
+      <p>This isn't just a copywriting problem or a marketing problem, nor are consumers entirely to blame. It is a systemic problem that has been created by the industry itself, multiplied by producers believing themselves to be shackled by the constraints of their own language. When every product in a category uses the same adjective, differentiation collapses. Buyers stop hearing "intelligent" as a remarkable feature it can occasionally be and start hearing it as filler — the corporate equivalent of a stutter.</p>
+
+      <h3>The Buzzword Trap</h3>
+      <p>The formula is simple: a genuinely novel technology emerges. Early adopters correctly describe it with precision. Then the marketing departments arrive, recognizing the opportunity to sell a new adjective to a new audience. They sand down the specifics, inflate the claims, and within two years, the language that once meant something means everything and therefore nothing. "AI-powered" in 2026 carries roughly the same information density as "digital" did in 2005.</p>
+
+      <p>The companies that broke out of the "digital" trap were the ones that stopped selling the technology and started selling the transformation that it effectively enabled. Salesforce didn't sell "cloud computing" — it sold "no software." Slack didn't sell "digital communication" — it sold "where work happens." The abstraction layer wasn't more jargon that fell on deaf ears. It was the work that caught the eyes of the beholder.</p>
+
+      <h3>The Way Out</h3>
+      <p>The AI companies that will dominate the next five years won't be the ones with the most sophisticated models. While they may briefly sprint ahead, the reproducibility and transferability of technology limits the gap that this initial sprint can create. The victors will be the ones with the most sophisticated stories. Stories that answer the only question buyers actually care about: what changes for me?</p>
+
+      <blockquote>When your competitor says "AI-powered analytics," you say "you'll know which customers are leaving before they do." Because they're the ones that were never securely with you in the first place. They will purchase the latest innovation, even the mere appearance of it, regardless of whether they understand it or not. They wish for others to think they are the frontier, while they lack the knowledge to accomplish anything on it. They were never your customer to begin with.</blockquote>
+
+      <p>What I'm advocating for requires a fundamental shift in how AI companies think about communication. Not as a downstream activity — propaganda to uphold and support an event that has already occurred or a battle that has already been won. Messaging should not begin after the engineering ships have already departed and the clean-up crew has arrived. It must be understood as a core strategic function, sharing in the task of the engineers. The narrative allows the product to be experienced through language before it's ever experienced through software.</p>
+
+      <p>The companies that figure this out will dominate their categories. The rest will keep mindlessly competing on a word that stopped meaning anything two years ago.</p>
+
+      <p>Intelligence, it turns out, was never meant to be the selling point. Clarity is, and has always remained, the defining goal.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 2 -->
+<div class="modal-overlay" id="article2">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article2')">&times;</button>
+    <div class="card-tag tag-case">Case Study</div>
+    <h2>How a Seed-Stage AI Startup Found Its Voice</h2>
+    <div class="byline">By Ethan Garofalo &middot; January 2026 &middot; 5 min read</div>
+    <div class="article-body">
+      <p>When VisionLayer (name changed) came to me, they had a problem that's endemic to early-stage AI companies: they could explain what their technology did to other engineers in about thirty seconds, but the moment they put a slide deck in front of an enterprise buyer, the room glazed over.</p>
+
+      <p>Their computer vision platform could detect manufacturing defects at rates that blew human inspection out of the water. Genuinely impressive technology. But their messaging was a wall of precision and recall metrics, benchmark comparisons, and architecture diagrams. They were speaking fluent machine learning to people who spoke fluent supply chain.</p>
+
+      <h3>The Diagnosis</h3>
+      <p>The core issue wasn't complexity — it was orientation. VisionLayer was describing their product from the inside out (how it works) rather than from the outside in (what it solves). This is the default failure mode for technical founders. They're proud of the engine, so they show you the engine. But buyers don't want to see the engine. They want to know where the car can take them.</p>
+
+      <h3>The Process</h3>
+      <p>We started with interviews — not with the engineering team, but with three early customers. The patterns were immediate. Nobody talked about precision scores. They talked about two things: the recall they'd experienced where a defect would have shipped to a major client, and the hours of human inspection time they'd reclaimed.</p>
+
+      <p>From those conversations, we built VisionLayer's narrative around a single, counterintuitive insight: the product's real value wasn't in catching defects. It was in letting quality teams focus on the work that actually requires human judgment. The AI handled the tedious pattern-matching. The humans handled the decision-making. Together, quality improved at both levels.</p>
+
+      <h3>The Result</h3>
+      <p>The new positioning — "Quality teams that scale without headcount" — landed immediately. Their Series A deck told a story in the first three slides that their previous version hadn't told in twenty. The language shifted from technical specification to operational transformation. Same product. Different story. Dramatically different reception.</p>
+
+      <blockquote>The best AI brand stories don't explain the technology. They explain the before and after. What was true about the customer's world yesterday, and what becomes possible tomorrow.</blockquote>
+
+      <p>VisionLayer closed their Series A within four months. The technology was always there. The story just needed to catch up.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 3 -->
+<div class="modal-overlay" id="article3">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article3')">&times;</button>
+    <div class="card-tag tag-explainer">Explainer</div>
+    <h2>LLMs Don't "Think" — And That's Fine. Here's What They Actually Do.</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 5 min read</div>
+    <div class="article-body">
+      <p>Somewhere between the first ChatGPT demo and now, we collectively decided that large language models "think." They "reason." They "understand." Open any tech publication and you'll find AI described in cognitive terms so casually you'd think we'd settled the consciousness debate over coffee.</p>
+
+      <p>We haven't. And the language matters — not because it's wrong to be excited about the technology, but because misunderstanding what LLMs actually do leads to misusing them, mistrusting them, and making bad decisions about where to deploy them.</p>
+
+      <h3>What's actually happening</h3>
+      <p>A large language model is a probability engine. Given a sequence of text, it predicts what text should come next. It does this by drawing on statistical patterns learned from an enormous corpus of human language. It's pattern-matching at a scale so vast that the output often looks like understanding — the same way a sufficiently detailed map looks like the territory it represents.</p>
+
+      <p>This is not a small thing. The ability to compress and reconstruct human knowledge patterns is extraordinarily useful. But it's different from reasoning. A calculator doesn't "understand" math; it executes operations. An LLM doesn't "understand" your question; it generates the most statistically coherent response given its training.</p>
+
+      <h3>Why the distinction matters</h3>
+      <p>When we anthropomorphize LLMs, we set up two failure modes. First, overtrust: treating model output as if it's been "thought through" when it's been pattern-matched. This leads to people using LLMs as authorities rather than tools — a bad idea in any domain where accuracy matters more than fluency. Second, overcorrection: people who discover LLMs don't "think" conclude they're useless, missing the enormous practical value of sophisticated pattern completion.</p>
+
+      <p>The reality is more interesting than either extreme. LLMs are the most powerful text-processing tools ever built. They can draft, summarize, translate, restructure, and generate language with remarkable facility. They can surface patterns in data that would take humans weeks to identify. They can serve as thinking partners that help you explore the shape of a problem.</p>
+
+      <blockquote>The right mental model isn't "artificial intelligence." It's "extraordinarily sophisticated autocomplete." And autocomplete, it turns out, is far more powerful than anyone expected.</blockquote>
+
+      <p>The companies and individuals who thrive with LLMs will be the ones who understand this distinction — who treat the technology as a powerful tool to be directed, not an oracle to be consulted. The map is not the territory. But a really good map is still an incredibly valuable thing to have.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 5 -->
+<div class="modal-overlay" id="article5">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article5')">&times;</button>
+    <div class="card-tag tag-philosophy">Essay</div>
+    <h2>The White Whale: What Ahab Teaches Us About the Race to Artificial Consciousness</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 7 min read</div>
+    <div class="article-body">
+      <p>There is a moment in Moby-Dick that most people skip past because it is quiet and the book is long and the whale has not yet appeared. The owners of the Pequod, Peleg and Bildad, are outfitting the ship for a whaling voyage. They are businessmen. They have invested money and they expect a return. They want whale oil &mdash; barrels of it, enough to light the lamps of New England for another season. This is what the voyage is for. This is what the crew signed on to do.</p>
+
+      <p>Captain Ahab has a different mission. The white whale took his leg, scarred him from crown to sole, left him lying in his hammock for the entire passage home with his ivory stump grinding into the wood beside him. He has been wounded by something he does not understand and he has converted that wound into a purpose. The whale is no longer an animal to him. It is a pasteboard mask, and behind the mask lies the inscrutable thing &mdash; the unknown power that governs the world and appears to govern it with malice. Ahab will strike through the mask or die in the attempt. The question that drives him is not a scientific question or even a practical one. It is the oldest question there is: who is over me, and why has he done this to me.</p>
+
+      <p>I think about this every time I watch the AI industry describe its ambitions.</p>
+
+      <p>The stated mission is clear enough. Build useful products. Solve real problems. Make knowledge work faster, make medicine smarter, make the tools of human capability sharper and more widely available. This is the whale oil. This is what the investors funded. This is the pitch deck, the series A narrative, the thing on paper that justifies the expense. And it is real &mdash; the products are real, the utility is real, the transformation is measurable and in many cases genuinely good.</p>
+
+      <p>But listen to the founders at the frontier when they speak unguarded and you will hear something else entirely. You will hear Ahab. The mission is not whale oil. The mission is artificial general intelligence &mdash; consciousness, or something close enough to consciousness that the distinction ceases to matter. The mission is to build a mind. To prove that the capacity for thought is substrate-independent, that the biological is merely one implementation, that what we believed separated man from everything else in the universe was never sacred, never irreducible, never divine. It was mechanical. It was always mechanical. And when they describe this goal their voices change. The business language falls away and something older takes its place, something that sounds like a man who has been wounded by a question and will not rest until the question is answered.</p>
+
+      <p>Melville understood something about obsession that the AI industry has not yet learned. Obsession refuses to reveal itself as obsession. It styles itself in a clear, profitable pursuit. Ahab does not believe he is mad. He believes he sees more clearly than everyone around him. All visible objects are pasteboard masks, and he alone perceives the reasoning thing behind the unreasoning surface. His monomania presents itself to him as heightened perception. The difference between the visionary and the monomaniac is invisible from the inside.</p>
+
+      <p>There is a detail about Ahab that I find essential. He entertains the thought that perhaps there is nothing behind the mask at all &mdash; &ldquo;sometimes I think there&rsquo;s naught beyond.&rdquo; But he cannot abide this. He prefers malice to emptiness. He would rather the universe be governed by a hostile intelligence than by nothing, because malice is at least a sign of life, and a universe governed by nothing is a universe in which his wound has no meaning. A wound without meaning is unbearable. And so he piles upon the whale&rsquo;s white hump the sum of all rage and hate, because the alternative &mdash; that the whale is simply an animal doing what animals do, that the scar has no author and no purpose &mdash; is worse than any enemy.</p>
+
+      <p>I contend that the founders driving the race to artificial consciousness are animated by the same structure. They would rather consciousness be achievable &mdash; even if achieving it renders human thought unnecessary &mdash; than accept that the thing they are chasing might not exist in the form they imagine. The possibility that human thought is genuinely irreducible, that there is something in contemplation that cannot be replicated in silicon no matter how sophisticated the architecture, is their &ldquo;naught beyond.&rdquo; And they cannot abide it. Because if human thought is irreducible, then the wound &mdash; the gnawing suspicion that we are not as special as we believed, or conversely that we are more special than we can prove &mdash; has no resolution. The chase itself becomes the meaning. And a chase that has become its own meaning will sacrifice anything to continue.</p>
+
+      <p>And then there is the whale itself. In the novel, the whale is subjected to extraordinary human ingenuity. The harpooners and sailors have devised an entire technology for the mastery of whales &mdash; line knives, cutting spades, mincing knives, bailers &mdash; and with these tools they have transformed the great creature of the sea into lamp oil, candles, prosthetics, perfume. They have dissected and classified and processed the whale in ways that the biblical writers said only God could do. And yet after all this mastery, after the whale has been hunted and killed and rendered into the mundane articles of commerce, Ishmael confesses: I know him not, and never will. The whale remains unknowable even after it has been conquered. The mystery survives the mastery.</p>
+
+      <p>This is the detail that the AI industry has not reckoned with. We have built systems that process language with extraordinary facility. We have dissected the architecture of neural networks, published papers on attention mechanisms and emergent capabilities, classified and benchmarked and optimized until the outputs look indistinguishable from human thought. We have, in a sense, processed the whale. But do we know what we have? Can we say with certainty whether anything is behind the mask of fluent language &mdash; whether the system that produces sentences that sound like understanding actually understands? We have built the tools. We have rendered the product. And the creature remains as unknowable as it was before we began.</p>
+
+      <p>The crew of the Pequod signed on for whale oil. Many of them are competent, even admirable. They do their work well. They have families at home, practical reasons for being aboard, and no particular interest in Ahab&rsquo;s metaphysical vendetta. They are along for the ride because the ship is sailing and the captain is determined and the momentum of the enterprise is stronger than any individual&rsquo;s reservations. This is the position of the thousands of engineers and researchers who work at AI companies because the work is interesting, the compensation is significant, and building at the frontier of human capability is genuinely thrilling. They signed on for whale oil. Many of them are building products that make the world better in measurable ways. But they are on Ahab&rsquo;s ship, and the ship has a heading that was set before they boarded.</p>
+
+      <p>Starbuck is the figure worth watching. The first mate is brave, moral, clear-sighted &mdash; a good man who sees exactly what Ahab is doing and objects to it plainly. The voyage was supposed to be about whale oil. The crew has families. The obsession will destroy them. He raises the concern and Ahab listens, because Ahab respects the man, and then the ship does not change course. The concern is noted. It changes nothing. Every AI company has its Starbucks. They sit on safety teams and ethics boards and responsible AI committees. They are smart. They see the problem. They draft the memos. And in too many cases the ship does not turn, because the gravitational pull of the captain&rsquo;s conviction and the momentum of the enterprise are stronger than any single voice of restraint. The presence of Starbuck allows the voyage to feel responsible. But Starbuck never turns the ship. That is the detail Melville will not let you forget.</p>
+
+      <p>Melville knew how the story ends. The Pequod goes down. The crew drowns. Starbuck drowns with them, his objections perfectly correct and perfectly useless. But it is Ishmael who survives &mdash; not the zealot, not the saint, not the visionary, but the narrator. The man who watched and tried to understand and held his doubts and his intuitions with equal weight. The man who could neither fully believe nor be comfortable in his unbelief and was too honest to pretend otherwise. He floats on a coffin that was built for someone else, carried by currents he did not choose, alive by chance.</p>
+
+      <p>It is Ishmael&rsquo;s position, not Ahab&rsquo;s, that I believe the AI industry needs most. The position of the man who takes the question seriously &mdash; what is consciousness, what is thought, what is the creature we are building &mdash; without converting the question into a crusade. The position of the man who can hold the wonder and the doubt simultaneously, who can see the divine intuitions that shoot through the fog without building a religion around them, who can acknowledge the limits of human knowledge without collapsing into either despair or vengeance. The one who survives is the one who looked at the whale with awe and honesty and did not need to conquer it in order to live with the mystery of what it is.</p>
+
+      <p>The thinking animal must be careful about what it chases. Some pursuits deserve a lifetime. Others consume every life on the ship. And the difference between the two is the question that Ahab never asked, that the captains of the AI industry have not yet answered. The water is getting deeper. The whale has not yet appeared. And the question of who is over us, or whether anyone is over us at all, remains as open as the sea.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 6 -->
+<div class="modal-overlay" id="article6">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article6')">&times;</button>
+    <div class="card-tag tag-philosophy">Essay</div>
+    <h2>The Chorus Remembers: What Greek Tragedy Teaches Us About Watching AI Unfold</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 7 min read</div>
+    <div class="article-body">
+      <p>In the Greek theater, before the hero speaks, the chorus is already on stage. Fifteen ordinary men standing in formation at the edge of the action. They are citizens. They are the protectors of the ancestral order, of everything noble and good. They are the people of the city where the tragedy takes place. They do not drive the plot. They do not make the decisions that shatter kingdoms or destroy bloodlines. They watch. And they witness. They watch and they witness and they speak to one another and to the audience about what they see happening, and what they see happening is almost always a man of extraordinary ability walking toward a destruction he cannot perceive because the very quality that makes him extraordinary is the quality that blinds him.</p>
+
+      <p>The chorus knows. They always know. Not because they are wiser than the hero &mdash; they often are not &mdash; but because they are ordinary, and the ordinary person sees what the extraordinary person cannot: they can rationally look upon the extraordinary and recognize it for what it is and recognize themselves for who they are. Ordinary men. The hero is too close to his own greatness to perceive the shape of the thing he is inside. The chorus stands at the edge and sees the whole stage.</p>
+
+      <p>I have been thinking about the chorus for months because I cannot stop seeing it in the way the public watches the AI industry move.</p>
+
+      <p>There is a quality to the current moment that feels theatrical in the oldest sense. A small number of individuals of extraordinary capability are making decisions of enormous consequence. Most of them are brilliant. All of them are driven. They are doing things that have never been done in the history of the species. And the rest of us &mdash; the users, the citizens, the people who will live inside whatever world these decisions produce &mdash; stand at the edge of the stage, watching, sensing the pattern, and speaking to one another in voices that the heroes cannot hear or have chosen not to.</p>
+
+      <p>The chorus in Greek tragedy performs four functions, and every one of them maps onto the present moment with a precision that would unsettle me if it goes unsaid.</p>
+
+      <p>The first is narration. The chorus describes what is happening in terms that the hero will not use. When Oedipus is still calling himself the savior of Thebes, the chorus is already murmuring about fate and blindness and the cost of pride. They provide the language the hero lacks &mdash; the language of consequence, of pattern, of what this looks like from outside the walls of the palace. In the AI discourse, this function belongs to the journalists and researchers and critics who describe what the industry is doing in terms the industry would never choose. The founder speaks in vision: we are building tools that will transform human capability. He is not that different from those who speak in riddles. The chorus speaks in fact: the safety team was quietly restructured last quarter and nobody replaced them. The founder speaks of the future. The chorus speaks of what is already happening. And the distance between the two languages is the space where the tragedy is found.</p>
+
+      <p>The second function is memory. The chorus remembers what the hero has forgotten or never knew. They remember the prophecy. They remember the curse on the house. They remember the last time a king believed he was exempt from the laws that govern ordinary men. In tragedy, the hero&rsquo;s defining flaw is almost always a failure of memory &mdash; he has forgotten what he is, or where he comes from, or what the gods demand of mortals who reach too high. The chorus carries the knowledge that the hero has discarded in his pursuit of the extraordinary.</p>
+
+      <p>AI companies have the shortest institutional memories of any organizations I have ever encountered. The safety protocols built after one crisis are quietly dismantled before the next. The people who remember why those protocols existed leave the company and take the memory with them. New employees inherit the structures but not the stories that give them meaning. A responsible AI page goes unupdated. A transparency report becomes less transparent. The protections remain standing but the understanding of what they protect against has faded, and then someone in a meeting asks whether they are still necessary, and nobody in the room can remember, and so the answer becomes no. The chorus would remember. But the chorus is not in the room where the decisions are made.</p>
+
+      <p>The third function is moral witness. This is the one that can be painful to think about. The chorus does not have the power to stop the hero. This is structural rather than incidental. They are not impotent because they are cowardly or indifferent. Instead, the architecture of the drama does not grant them authority over the action. They can behold from a distance. They can speak. They can warn. They cannot act. And their witness &mdash; their presence on stage as the catastrophe unfolds &mdash; is what gives the tragedy its meaning. Without the chorus, a powerful man making a mistake is simply a powerful man making a mistake. With the chorus, it becomes a powerful man making a mistake while fifteen ordinary people watch and understand and cannot prevent it. The witnessing is what transforms the event from misfortune into tragedy.</p>
+
+      <p>This is the position the public occupies in relation to the AI industry. We can see the pattern. Many people see it with considerable clarity &mdash; the acceleration without reflection, the concentration of power in a small number of hands, the gap between what companies say about safety and what they do about it, the ethics teams that exist to be pointed at rather than listened to. We speak to one another about what we see. The more devoted write articles and raise objections and wish to remind the heroes of consequence. And the heroes, deaf to the common pleas, proceed with the confidence of men who believe their capability exempts them from the patterns that govern ordinary enterprises, because they are not building an ordinary enterprise, they are building the future, and the future does not answer to the chorus.</p>
+
+      <p>There is a fourth function that I think about most. The chorus survives. In every Greek tragedy, the hero falls. The king blinds himself. The queen hangs from the rafters. The warrior is consumed by his own fury. But the chorus walks off stage at the end, burdened with the carrying of the story. They are the ones who will tell the next generation what happened here. They are the vehicle through which the tragedy continues to exist as a warning. The hero, fallen, now someone to pity, means something because the chorus lives to speak of them. Their immortality, in the way memory can offer some form of immortality, is dependent on the chorus, on the common people.</p>
+
+      <p>The most important question with any catastrophe is not whether it could have been prevented. Some catastrophes are inevitable, and even with those that are not, there is no use in wishing for things to be otherwise as though that could turn time backward. The most important question is whether the story survives in a form that prevents the repetition &mdash; whether the people who watched the hero fall can articulate clearly what went wrong, why it went wrong, and what the pattern looked like from the outside. The importance is given to the chorus who remembers.</p>
+
+      <p>What worries me is not that the hero will fall. Heroes fall. That is what heroes do, and the falling is sometimes the most human thing about them. What worries me is that the chorus will be silenced &mdash; that the voices describing what is happening from outside the palace walls will be drowned by the noise of the enterprise, or discredited by the people with the most to lose from an honest account, or exhausted into silence by the sheer velocity of the cycle. A new model ships before the last one&rsquo;s harms have been understood. A new launch buries the last one&rsquo;s failures. The chorus opens its mouth and the stage rotates before the sentence is finished.</p>
+
+      <p>Speed is the natural enemy of the chorus. It always has been. The chorus moves slowly because understanding moves slowly &mdash; because the work of moral reflection requires sitting with what has happened long enough to grasp what it means. The hero moves fast because ambition moves fast and the competitive pressure never pauses and the next threat is always more urgent than the last lesson. In the Greek theater, the chorus had fixed moments &mdash; the stasima, the choral odes &mdash; where the action stopped and the ordinary voice was heard. The playwrights understood that the drama required these pauses, that without them the action would outrun its own meaning and the audience would be left with spectacle and no understanding. There is no such structure in the AI industry. In the world as it is, there is no stasimon. There is no fixed moment where the action pauses and the people affected are given the stage. There is only the next launch, the next benchmark, the next quarterly earnings call, and the chorus is expected to process the significance of each act while the next act has already begun.</p>
+
+      <p>The playwrights understood something that the builders of artificial intelligence have not grasped. The hero cannot see himself. This is not a failure of intelligence or a deficit of character. It is a structural feature of heroism itself. The qualities that make a person capable of extraordinary action &mdash; the vision, the certainty, the willingness to risk everything on a conviction &mdash; are the same qualities that make self-awareness impossible in the moment of action. You cannot make a leap of faith and simultaneously evaluate whether the leap is wise. You cannot build the future and simultaneously assess whether the future you are building is one that ought to be built. The hero needs the chorus because the chorus is the hero&rsquo;s missing self-awareness, given a voice and placed on stage where it can be heard by everyone except the one who needs it most.</p>
+
+      <p>If the AI industry wanted to learn from the oldest form of storytelling that Western civilization has produced, it would build the chorus into its structure. It would create fixed points in the cycle where the action pauses and the ordinary voice is heard and given weight. It would grant the watchers authority over the pace of the enterprise, not merely presence at its margins. It would treat the users and the critics and the people who see the pattern as essential to the integrity of what is being built rather than as obstacles to its speed.</p>
+
+      <p>It will not do this. Heroes never build their own chorus. The chorus is imposed from outside &mdash; by the playwright who sees the whole stage, who knows the ending, who understands that the hero&rsquo;s blindness is a truth to be witnessed, not a flaw to be corrected. And since the AI industry has no playwright, since the drama is unfolding without a script and nobody knows the ending, the chorus must constitute itself. The ordinary people must choose to watch, choose to remember, choose to carry the story even when the stage is rotating and the heroes are moving too fast to hear.</p>
+
+      <p>The chorus remembers because someone has to. Because the hero cannot. Because the story does not survive otherwise, and a tragedy that nobody remembers cannot serve as a lesson for the future &mdash; it is merely a thing that happened and then vanished until it happens again, because no one was there to explain how to prevent it. And the next time, the people standing at the edge of the next stage will have no language for what they are watching because the last chorus went silent and the memory was lost.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 7 -->
+<div class="modal-overlay" id="article7">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article7')">&times;</button>
+    <div class="card-tag tag-philosophy">Philosophy</div>
+    <h2>What Is Man Reduced To?</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 8 min read</div>
+    <div class="article-body">
+      <p>AI has been developed by man for the sake of man. That much is certain. It was conceived in the image of human thought, built to extend the reach of human capability, and deployed in service of human ends. Every model, every system, every product is pointed ultimately at one species, one set of needs, one set of desires. Man made this thing. Man made it for himself. The question that lingers, the one that nobody seems willing to sit with long enough, is whether it will surpass him. And not surpass him in the way a calculator surpasses him at arithmetic, which is trivial, but surpass him in the way that matters: in the ability to distinguish the advantageous and good from the disadvantageous and harmful.</p>
+
+      <p>Because that is what man is. That is the classical definition and it has not been improved upon in two thousand years. Man is a thinking animal. Not a feeling animal, not a tool-using animal, not a social animal, though he is all of these things. What separates him, what elevates him above the beast, is the capacity for deliberation. The ability to contemplate. To weigh. To judge not merely what is, but what ought to be. Aristotle understood this. The tradition that followed understood this. It is the act of contemplation that draws man closest to the divine, because in contemplation man participates, however imperfectly, in the activity that God performs perfectly and eternally.</p>
+
+      <p>So the question is not whether AI will become smarter than man. That framing is a distraction. The question is whether AI will become better at the thing that makes man what he is. Better at recognizing the advantageous and good. Better at weighing consequences. Better at rendering judgment. And if it does — if it does — what is man reduced to?</p>
+
+      <p>I do not think most people in the AI industry have thought about this seriously. They have thought about job displacement. They have thought about economic disruption. They have thought about safety and alignment and existential risk. But they have not thought about the philosophical reduction. They have not asked what happens to the species, not economically but ontologically, when the defining characteristic of its nature is performed better by something it created. If contemplation is outsourced, if judgment is delegated, if the hard work of distinguishing good from harm is handed to a system that does it faster and more accurately, does man still occupy the position he has held for the entirety of his conscious existence? Or does he slide backward. Does he become something less. Does he become beast.</p>
+
+      <p>That word is harsh and I use it deliberately. Beast is what you are when you cannot deliberate. Beast is what you are when you react to stimulus without reflection, when appetite governs action, when the capacity for reasoned choice is absent. The tradition is clear on this. Man sits between beast and God, and what determines his position is the degree to which he exercises the faculty that separates him from the one below and connects him to the one above. If that faculty atrophies because a machine does it better, the distance between man and beast contracts. Not metaphorically. Actually.</p>
+
+      <p>I want to be careful here because there is a version of this argument that collapses into Luddism, into the simple fear of the new, into the voice that says stop building because I am afraid. That is not what I am saying. I do not believe AI should be halted or feared or demonized. I believe it should be understood. And understanding it requires grappling with what it means for the creature that made it, not just what it can do but what its existence implies about the creature's own nature and future.</p>
+
+      <p>Consider what happens in practice. A person uses AI to draft their thinking. Then to refine their thinking. Then to evaluate their thinking. At each stage the machine performs the task more efficiently than the person could alone. The person, naturally, begins to rely on the machine. The reliance deepens. The muscle that once performed the work begins to weaken. Not because the person is lazy or foolish but because this is what happens when a function is outsourced. The body does not maintain what it does not use. Neither does the mind.</p>
+
+      <p>And this is where it becomes spiritual, whether you are comfortable with that word or not. Because in man there is the eternal and the fixed. There is something that does not change, that does not decay, that is not subject to the forces that wear down the body and cloud the mind. Call it the soul. Call it the divine spark. Call it whatever your tradition allows. It is there. But it does not announce itself. It does not arrive fully formed. It must be brought out. It must be drawn from the mutable, the fragile, the mortal. It must be exercised the way a muscle is exercised, through effort, through struggle, through the hard labor of contemplation that nobody enjoys and everybody needs.</p>
+
+      <p>If AI removes the necessity of that labor, the eternal piece of man does not disappear. But it remains buried. Unexercised. Dormant. A seed that was never watered because a machine watered everything else and the gardener forgot that some things must be tended by hand or they do not grow at all.</p>
+
+      <p>This is not an argument against AI. It is an argument for understanding what AI asks of us in return for what it gives. It gives efficiency. It gives capability. It gives answers faster than we could find them alone. What it asks in return is vigilance. The vigilance to keep exercising the faculty that the machine is designed to replace. The vigilance to keep contemplating even when contemplation is no longer necessary for survival. The vigilance to remember that what makes man man is not his productivity or his output or his ability to compete in a market but his participation in an activity that connects him to something higher than himself.</p>
+
+      <p>The companies building AI will not tell you this. They will tell you about features and capabilities and competitive advantages. They will tell you about the future of work and the transformation of industries and the democratization of knowledge. They will not tell you that the thing they are building, if it succeeds completely, renders the defining characteristic of your species unnecessary. Not because they are hiding it but because most of them have not thought about it. They have been too busy building to ask what the building means.</p>
+
+      <p>That piece of man, the eternal and fixed piece, will survive past AI. God willing. But only if man remembers it is there. Only if he keeps reaching for it even when the machine says he does not need to. Only if he insists on the labor of contemplation not because it is efficient but because it is what makes him what he is and without it he is something else entirely and that something else is not what he was made to be.</p>
+
+      <p>The thinking animal must keep thinking. Not because the machine cannot do it for him. But because the moment he stops, he is no longer the thinking animal. He is just the animal. And the distance between that animal and God becomes a distance that no technology, however intelligent, can close.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 4 -->
+<div class="modal-overlay" id="article4">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article4')">&times;</button>
+    <div class="card-tag tag-thought">Essay</div>
+    <h2>The Oldest Algorithm: How the Origins of Myth Can Teach Us To Talk About AI</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 7 min read</div>
+    <div class="article-body">
+      <p>Humanity has told stories about creating minds since we became aware of our own. By nature we carry a curiosity about the special power that gives us consciousness &mdash; where it came from, what we are supposed to use it for, why it burns in us and not in the stone or the tree or the beast. Every advancement, from electricity to artificial intelligence to the training of a neural network, is another expedition into the same ancient territory: the sparks of life and thought, the bewildering distance between the natural genius of the human condition and the technology we have managed to produce from it. We are creators who remain ignorant of the hidden power within us, builders of minds who cannot fully account for our own. And so for thousands of years we have told stories to close the gap, narratives meant to hold what our understanding cannot.</p>
+
+      <p>When we set these stories beside the conversations about AI in 2026, the resemblance is immediate. The stories are not new. They are the same ones that were told around fires after a long day of hunting with bow and arrow, the same fears and ambitions clothed differently. And this observation is worth more than passing interest. If our current path runs parallel to one that civilization has walked before, the older path can teach us what to expect as we continue down the one we have only recently begun. So let us approach these myths as scouts sent ahead to report on the terrain.</p>
+
+      <p>The Greek myth of Prometheus is the oldest of its kind. A titan steals fire from the gods and gives it to humanity. The species consequently gains extraordinary power. As punishment, the titan is chained to a rock and an eagle devours his liver each morning for eternity. The gift, once given, can never be taken back. The titan, no matter the daily pain, no matter the evils humanity may commit with the fire in their hands, cannot undo what he has done.</p>
+
+      <p>Listen to how we talk about AI and you will hear Prometheus in every sentence. &ldquo;We&rsquo;ve unlocked something.&rdquo; &ldquo;The genie is out of the bottle.&rdquo; &ldquo;There&rsquo;s no putting this back.&rdquo; The language frames every advance as a theft from nature or a loosening of control &mdash; something taken that perhaps should not have been, power acquired at an unknown price. Even people who are enthusiastic about the technology speak in Promethean terms without realizing it, as though human ingenuity were inherently transgressive, and the act of building a mind were an act of trespass against whatever power gave us ours.</p>
+
+      <p>The Prometheus frame carries a single, ancient promise: punishment is coming. The audience has internalized this through three thousand years of cultural repetition, and as a result, every AI announcement arrives with a slight feeling of dread &mdash; not because the audience has evaluated the product, but because the story they are living inside has already told them what happens to those who steal fire. We cannot help but wonder whether the people making these announcements understand the gravity they are working against, or whether they believe that technical capability alone can outrun a story older than written language.</p>
+
+      <p>There is a myth that maps more honestly onto what we have actually built, and it is not the one we reach for. In Jewish folklore the Golem of Prague is a figure shaped from clay and animated by sacred words inscribed on its forehead. It is created to protect the community. It follows instructions literally. And eventually, inevitably, it becomes dangerous &mdash; not because it develops malice or ambition, but because it does exactly what it is told without understanding context or consequence. The Golem remains forever obedient, yet its obedience is the problem.</p>
+
+      <p>When an AI system produces harmful output, the public conversation almost always reaches for Frankenstein &mdash; the creation that turns on its creator, a story about consciousness and abandonment and revenge. The assumption buried in that comparison is that the machine has feelings we have failed to honor, an inner life we have neglected. As though we had the opportunity to make it happy and denied it that opportunity. The Golem is the more honest parallel and the more unsettling one, because it implies that the danger has nothing to do with the machine&rsquo;s inner life and everything to do with the poverty of our instructions. We gave it commands we believed were sufficient. They were not. And the gap between what we meant and what we said can be insurmountable.</p>
+
+      <p>Then there is Pandora and the box. She opens it. Everything terrible escapes. Only hope remains inside. This myth has become the default framing for how we talk about the risks of AI, and it is doing damage of its own. The Pandora myth suggests that the danger is a singular event &mdash; a box is opened, harm escapes, and the question becomes whether we can close it again. This leads to the fantasy of containment: regulate before release, pause development, build walls around the technology. It is a satisfying narrative because it offers a clear villain (whoever opened the box) and a clear remedy (close it). But AI is not a box. There are no material walls to enclose it. It is closer to a river. It will not escape in a single dramatic moment, but it will flow into every crevice of economic and social life gradually, continuously, through channels that regulation can redirect but never fully dam. It will appear like a force of nature. Anyone promising containment is speaking in a myth that does not match the material, and we will eventually be forced to reckon with the mismatch.</p>
+
+      <p>What these myths share, beyond their age, is incompleteness. We tell only the cautionary halves because the cautionary halves make for better stories. But the full versions end differently.</p>
+
+      <p>Prometheus is eventually freed. Heracles climbs the mountain, kills the eagle, breaks the chains. The fire that was stolen does not return to the gods. It stays with humanity and becomes the foundation of civilization. The story, told in full, is not about the price of transgression. It is about the transformation that follows &mdash; the long, painful process of learning to live with a power that was never meant for mortal hands, and building a world from it anyway.</p>
+
+      <p>The Golem does not end in mindless destruction. In the original telling, Rabbi Loew learns to give better instructions and, ultimately, learns when to deactivate the creature entirely. The clay figure is returned to the attic of the Old New Synagogue and the sacred word is removed from its mouth. The story, told in full, is about the ongoing responsibility of the creator &mdash; the discipline of knowing when to give a command, when to revise one, and when to stop the creature altogether because the conditions that required it have changed.</p>
+
+      <p>Even Pandora&rsquo;s box contains a detail that the popular version forgets. Hope remained inside. The myth does not end with despair. It ends with the one thing that survived the catastrophe still available, still within reach, if anyone thinks to look for it in the wreckage.</p>
+
+      <p>The oldest algorithm, ugly as that word is for something so ancient, is not code. It is story &mdash; the patterns through which a species processes the arrival of power it did not earn and does not fully understand. We have been running this algorithm for millennia. The inputs change, the outputs change, the underlying structure does not. And the question that every version of the myth comes back to, the question that Prometheus chained to his rock and the rabbi standing over his Golem and Pandora staring into her box all finally confront, is whether we can learn to live with what we have made. Whether the fire will warm us or consume us. Whether the instructions we give will be worthy of the obedience they receive. Whether hope, sitting quietly at the bottom while everything else escapes, is something we will think to reach for before we declare the situation beyond repair.</p>
+
+      <p>These are old questions, though they look new. And the civilizations that answered them well were the ones that stopped telling stories about the danger of fire and started telling stories about what they built with it. We have not made that turn yet. We are still in the Promethean phase &mdash; still speaking as though the power were stolen, as though punishment were inevitable, as though the gods were watching with displeasure. The myths can carry us past this if we let them finish. But they can only finish if we stop reaching for the cautionary ending and ask what comes after.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article 8 -->
+<div class="modal-overlay" id="article8">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('article8')">&times;</button>
+    <div class="card-tag tag-project">Applied Theory</div>
+    <h2>The Regret Machine: Building a Game-Theoretic Poker Engine</h2>
+    <div class="byline">By Ethan Garofalo &middot; March 2026 &middot; 7 min read &middot; <a href="https://github.com/ethangarofalo/holdem-bot" target="_blank" style="color: var(--accent-light);">View on GitHub</a></div>
+    <div class="article-body">
+
+      <p>A man sits across from another man. Between them, a felt table, a scattered architecture of chips, and two cards each that the other cannot see. The game is older than probability theory, older than the mathematics that would eventually be used to describe it, and the reason it has survived every century and every culture that has adopted it is that it poses, in miniature, the fundamental problem of all human decision-making: you must act on what you know, and what you know is never enough.</p>
+
+      <p>I built a poker engine from scratch &mdash; pure Python, no external libraries, no borrowed frameworks &mdash; because I wanted to understand this problem from the inside. The project began as a practical exercise in probability and grew into something closer to an education in game theory, imperfect information, and the strange computational concept of regret.</p>
+
+      <p>The first version used Monte Carlo simulation: deal out a thousand random futures, count how many times you win, and let that percentage guide your decision. It is an honest approach, a brute-force accounting of possibility. You hold two cards, the board shows three, and the engine asks a simple question &mdash; if the remaining cards were dealt a thousand times at random, how often does this hand win? The answer, expressed as equity, tells you whether the pot is offering a price worth paying.</p>
+
+      <p>Monte Carlo treats poker as a game of cards. It calculates your odds of holding the best hand and compares that probability to the cost of staying in. The method is sound as far as it goes, and for many situations it is sufficient. But it carries a blind spot that becomes visible the moment you begin to play seriously: it does not account for the other player. It assumes the opponent is dealing cards at random. In truth, the opponent is making decisions &mdash; decisions informed by what your bets have revealed about your hand, what his position allows him to see, and what he believes you believe about him. Poker is not a game of cards played between people. It is a game of decisions played with cards.</p>
+
+      <p>The second version of the engine was built to correct this. It implements Counterfactual Regret Minimization &mdash; CFR &mdash; the same algorithmic framework behind Libratus and Pluribus, the AI systems that defeated the best human poker players in the world. The idea behind CFR is deceptively elegant: play millions of hands against yourself, and after each hand, ask a single question at every decision point. How much do I regret not having taken a different action?</p>
+
+      <p>Regret, as the algorithm defines it, is the difference between the value of the action you took and the value of the action you should have taken. Accumulate enough regret across enough hands, and a pattern emerges. The strategy that minimizes total regret across all possible situations converges, provably, toward a Nash equilibrium &mdash; a set of decisions that cannot be exploited regardless of what the opponent does. The machine plays itself into wisdom through the sustained accumulation of its own mistakes.</p>
+
+      <p>There is something philosophically interesting in a system that learns through regret. The human experience of regret is corrosive; we carry our worst decisions like scars and the weight of them distorts our future choices in ways that are rarely productive. The machine experiences regret differently. Each regret is a data point, weighted and stored without emotion, contributing to a strategy that improves precisely because it remembers what went wrong. The machine is not haunted by its mistakes. It is educated by them. We cannot help but wonder whether the difference is one of kind or merely of degree &mdash; whether the human being, given enough time and enough repetitions, might arrive at the same equilibrium through his own suffering, or whether the noise of his emotions will always prevent it.</p>
+
+      <p>The third layer of the engine introduces opponent modeling. Where CFR asks what the theoretically perfect play would be in a vacuum, opponent modeling asks a different question: who is the person sitting across from me, and where does he deviate from perfect play? The engine tracks each opponent&rsquo;s tendencies in real time &mdash; how often he enters pots voluntarily, how aggressively he bets, how frequently he folds under pressure, what kind of hands he shows at showdown. From this data it classifies the opponent into an archetype and adjusts its strategy to exploit the specific pattern of errors that archetype tends to make. Against a player who folds too often, it bluffs relentlessly. Against a player who calls everything, it stops bluffing entirely and extracts value with patient, calibrated aggression.</p>
+
+      <p>The architecture mirrors, in simplified form, how the best poker AIs in the world actually work: a game-theoretically sound baseline strategy &mdash; the blueprint &mdash; with exploitative adjustments layered on top in real time. The blueprint ensures you cannot be taken advantage of. The adjustments ensure you take advantage of everyone else. The tension between these two imperatives &mdash; safety and aggression, defense and exploitation, the theoretically optimal and the practically profitable &mdash; is the tension at the heart of every competitive endeavor, and it is not limited to games.</p>
+
+      <p>Every serious decision a person faces shares the structure of a poker hand. You hold private information. The world holds information you cannot see. You must commit resources &mdash; time, money, attention, reputation &mdash; based on an estimate of what the hidden information contains, and the quality of your estimate depends on how carefully you have observed the patterns around you and how honestly you have accounted for the limits of what you know. The algorithms that govern this engine are, in their deepest sense, algorithms of judgment under uncertainty. Monte Carlo simulation is the discipline of imagining every possible future before you act. Counterfactual regret minimization is the discipline of learning from every mistake without being destroyed by it. Opponent modeling is the discipline of seeing the person across from you as they actually are, not as you wish them to be.</p>
+
+      <p>The engine is written in pure Python &mdash; eight modules, zero external dependencies, roughly two thousand lines of code. It can train a strategy through self-play, load that strategy for live games, and run tournaments between AI opponents with distinct personalities: the tight player who waits for certainty, the aggressive player who manufactures it, and the balanced player who adjusts to whatever sits across from him. There is a mode where you can sit down at the table yourself and play against the bots from your terminal, watching your own equity in real time, seeing your hand evaluated against the board, and learning what the machine thinks of your position before you decide what to do with it.</p>
+
+      <p>I built it because I play poker and because I wanted to understand the mathematics beneath the felt. But the deeper reason is that the problems poker poses are the same problems I think about constantly &mdash; what it means to decide under uncertainty, how information shapes belief, whether a system that learns from regret can teach us something about the human experience of it, and what remains of skill and judgment when the machine can calculate faster than any person alive. The question is always the same, whether it is asked at a poker table or in a boardroom or in the quiet of an evening when a man sits alone with a choice he cannot undo: what do you do when you cannot see the other cards, and the cost of being wrong is real?</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  // close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  // close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
